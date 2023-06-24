@@ -20,7 +20,7 @@ export default function RecipeRowCard({ recipeId }) {
       <div className="mt-4 flex justify-between">
         <div>
           <h3 className="text-sm text-black">
-            <Link href={Routes.Recipes()}>
+            <Link href={Routes.RecipePage({ recipeId: recipe.id })}>
               <span aria-hidden="true" className="absolute inset-0">
                 {recipe.title}
               </span>
