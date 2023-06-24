@@ -4,7 +4,7 @@ Mastercamp Web shop project at EFREI
 
 ```
 gitclone https://github.com/Souuum/mastercamp-store && cd mastercamp-store
-npm i install next@13.3.4
+npm i next@13.3.4
 npm install blitz
 npm install
 ```
