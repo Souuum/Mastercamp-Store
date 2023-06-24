@@ -39,7 +39,7 @@ const UserInfo = () => {
           User role: <code>{currentUser.role}</code>
         </div>
         <div className={styles.body}>
-          <div className="flex flex-row w-full space-x-4">
+          <div className="grid grid-cols-3 gap-4">
             {recipes.map((recipe) => (
               <RecipeRowCard key={recipe.id} recipeId={recipe.id} />
             ))}
