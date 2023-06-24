@@ -13,16 +13,16 @@ generator client {
 // --------------------------------------
 
 model User {
-  id             Int      @id @default(autoincrement())
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  name           String?
-  email          String   @unique
+  id             Int       @id @default(autoincrement())
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  username       String
+  email          String    @unique
   hashedPassword String?
-  role           String   @default("USER")
-
-  tokens   Token[]
-  sessions Session[]
+  role           String    @default("USER")
+  avatar         String
+  tokens         Token[]
+  sessions       Session[]
 }
 
 model Session {
@@ -55,6 +55,29 @@ model Token {
   userId Int
 
   @@unique([hashedToken, type])
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  recipes   Recipe[]
+}
+
+model Recipe {
+  id          Int       @id @default(autoincrement())
+  title       String
+  content     String
+  time        String
+  difficulty  String
+  image       String
+  video       String
+  ingredients String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  category    Category? @relation(fields: [categoryId], references: [id])
+  categoryId  Int?
 }
 
 // NOTE: It's highly recommended to use an enum for the token type
