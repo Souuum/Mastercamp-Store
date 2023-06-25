@@ -7,13 +7,21 @@ import { useCurrentUser } from "src/users/hooks/useCurrentUser"
 import { useMutation } from "@blitzjs/rpc"
 import Link from "next/link"
 import { Routes } from "@blitzjs/next"
+import { useAllCategories } from "src/categories/hooks/useAllCategories"
 
 const UserInfo = () => {
   const currentUser = useCurrentUser()
-
+  const categories = useAllCategories()
   if (currentUser) {
     return (
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center content-start w-full">
+        <div className="flex flex-row items-center justify-center justify-evenly w-full">
+          {categories.map((category) => (
+            <div className="flex flex-row items-center">
+              <h1>{category.name}</h1>
+            </div>
+          ))}
+        </div>
         <div className={styles.body}></div>
       </div>
     )

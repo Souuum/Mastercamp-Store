@@ -48,12 +48,12 @@ const NavBar = () => {
             <div className="flex flex-shrink-0 items-center">
               <img
                 className="block h-8 w-auto lg:hidden"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                src="https://cdn.iconscout.com/icon/free/png-512/free-food-kitchen-nonveg-chicken-chistmas-dinner-restaurant-2-10441.png?f=avif&w=512"
                 alt="Your Company"
               />
               <img
                 className="hidden h-8 w-auto lg:block"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                src="https://cdn.iconscout.com/icon/free/png-512/free-food-kitchen-nonveg-chicken-chistmas-dinner-restaurant-2-10441.png?f=avif&w=512"
                 alt="Your Company"
               />
             </div>
