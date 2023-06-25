@@ -12,7 +12,7 @@ export default async function getCategory(input, ctx: Ctx) {
 
   const data = GetCategory.parse(input)
 
-  ctx.session.$authorize()
+  //ctx.session.$authorize()
 
   const category = await db.category.findUnique({
     where: { id: data.id },
