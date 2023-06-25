@@ -2,22 +2,16 @@ import { BlitzPage } from "@blitzjs/auth"
 import NavBar from "src/core/components/NavBar"
 import Layout from "src/core/layouts/Layout"
 import { Suspense, useEffect, useState } from "react"
-import styles from "src/styles/Home.module.css"
-import { useCurrentUser } from "src/users/hooks/useCurrentUser"
-import { useMutation } from "@blitzjs/rpc"
-import Link from "next/link"
-import { Routes } from "@blitzjs/next"
 import { useAllCategories } from "src/categories/hooks/useAllCategories"
-import RecipeRow from "src/recipes/components/RecipeRow"
 import { useAllRecipes } from "src/recipes/hooks/useAllRecipes"
 import Footer from "src/core/components/Footer"
-import { Recipe, Category } from "@prisma/client"
+import { Recipe } from "@prisma/client"
 import RecipeRowCard from "src/recipes/components/RecipeRowCard"
 
 function Page() {
   const [recipies, setRecipies] = useState<Recipe[]>([])
-  const [cacheRecipies, setCacheRecipies] = useAllRecipes()
-  const [categories, setCategories] = useAllCategories()
+  const cacheRecipies = useAllRecipes()
+  const categories = useAllCategories()
   const [ingredients, setIngredients] = useState([])
   const [selectedIngredients, setSelectedIngredients] = useState([])
   const [selectedCategories, setSelectedCategories] = useState([])
@@ -78,36 +72,39 @@ function Page() {
             className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
           <h3 style={{ marginBottom: "5px" }}>Ingredients</h3>
-          {ingredients.map(
-            (i) =>
-              i != "" && (
-                <div key={i} className="flex items-center mb-4">
-                  <input
-                    id={`c-${i}`}
-                    type="checkbox"
-                    onChange={(e) => selectIngredients(i)}
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-                  />
-                  <label class="ml-2 text-sm font-medium text-white-900 dark:text-white-300">
-                    {i}
-                  </label>
-                </div>
-              )
-          )}
+          {ingredients &&
+            ingredients.map(
+              (i) =>
+                i != "" && (
+                  <div key={i} className="flex items-center mb-4">
+                    <input
+                      id={`c-${i}`}
+                      type="checkbox"
+                      onChange={(e) => selectIngredients(i)}
+                      className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                    />
+                    <label className="ml-2 text-sm font-medium text-white-900 dark:text-white-300">
+                      {i}
+                    </label>
+                  </div>
+                )
+            )}
           <h3 style={{ marginBottom: "5px" }}>Categories</h3>
-          {categories.map((c) => (
-            <div key={c.id} className="flex items-center mb-4">
-              <input
-                id={`c-${c.id}`}
-                type="checkbox"
-                onChange={(e) => selectCategories(c.id)}
-                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <label className="ml-2 text-sm font-medium text-white-900 dark:text-white-300">
-                {c.name}
-              </label>
-            </div>
-          ))}
+
+          {categories &&
+            categories.map((c) => (
+              <div key={c.id} className="flex items-center mb-4">
+                <input
+                  id={`c-${c.id}`}
+                  type="checkbox"
+                  onChange={(e) => selectCategories(c.id)}
+                  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                />
+                <label className="ml-2 text-sm font-medium text-white-900 dark:text-white-300">
+                  {c.name}
+                </label>
+              </div>
+            ))}
 
           <button
             type="button"
