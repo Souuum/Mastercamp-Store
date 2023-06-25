@@ -47,3 +47,8 @@ export const ChangePassword = z.object({
   currentPassword: z.string(),
   newPassword: password,
 })
+
+export const UpdateAccount = z.object({
+  email: z.string(),
+  username: z.string(),
+})
