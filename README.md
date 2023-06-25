@@ -9,12 +9,6 @@ npm install blitz
 npm install
 ```
 
-to populate the database:
-
-```
-blitz db seeds
-```
-
 to run the project:
 
 ```
