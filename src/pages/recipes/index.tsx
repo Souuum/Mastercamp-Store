@@ -3,7 +3,7 @@ import Link from "next/link"
 import Layout from "src/core/layouts/Layout"
 import { useCurrentUser } from "src/users/hooks/useCurrentUser"
 import { useAllRecipes } from "src/recipes/hooks/useAllRecipes"
-
+import NavBar from "src/core/components/NavBar"
 import logout from "src/auth/mutations/logout"
 import { useMutation, useQuery } from "@blitzjs/rpc"
 import { Routes, BlitzPage } from "@blitzjs/next"
@@ -25,19 +25,6 @@ const UserInfo = () => {
     console.log(recipes)
     return (
       <div className="flex flex-col justify-center items-center">
-        <button
-          className={styles.button}
-          onClick={async () => {
-            await logoutMutation()
-          }}
-        >
-          Logout
-        </button>
-        <div>
-          User id: <code>{currentUser.id}</code>
-          <br />
-          User role: <code>{currentUser.role}</code>
-        </div>
         <div className={styles.body}>
           <div className="grid grid-cols-3 gap-4">
             {recipes.map((recipe) => (
@@ -68,9 +55,11 @@ const UserInfo = () => {
 
 const Recipes: BlitzPage = () => {
   return (
-    <Layout title="Home">
+    <Layout title="Recipe">
       <div className={styles.globe} />
-
+      <Suspense>
+        <NavBar />
+      </Suspense>
       <div className={styles.container}>
         <main className={styles.main}>
           <div className={styles.wrapper}>

@@ -8,6 +8,8 @@ import { useRouter } from "next/router"
 import { useMutation } from "@blitzjs/rpc"
 import Link from "next/link"
 import { assert } from "blitz"
+import NavBar from "src/core/components/NavBar"
+import { Suspense } from "react"
 
 const ResetPasswordPage: BlitzPage = () => {
   const router = useRouter()
@@ -16,6 +18,9 @@ const ResetPasswordPage: BlitzPage = () => {
 
   return (
     <div>
+      <Suspense>
+        <NavBar />
+      </Suspense>
       <h1>Set a New Password</h1>
 
       {isSuccess ? (

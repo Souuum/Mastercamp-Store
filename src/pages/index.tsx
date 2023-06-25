@@ -5,7 +5,8 @@ import logout from "src/auth/mutations/logout"
 import { useMutation } from "@blitzjs/rpc"
 import { Routes, BlitzPage } from "@blitzjs/next"
 import styles from "src/styles/Home.module.css"
-
+import NavBar from "src/core/components/NavBar"
+import { Suspense } from "react"
 /*
  * This file is just for a pleasant getting started page for your new app.
  * You can delete everything in here and start from scratch if you like.
@@ -51,14 +52,16 @@ const Home: BlitzPage = () => {
   return (
     <Layout title="Home">
       <div className={styles.globe} />
-
+      <Suspense>
+        <NavBar />
+      </Suspense>
       <div className={styles.container}>
         <div className="relative isolate px-6 pt-14 lg:px-8">
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
             <div className="hidden sm:mb-8 sm:flex sm:justify-center">
               <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                 Read the site rules{" "}
-                <Link href={Routes.Home()} className="font-semibold text-indigo-600">
+                <Link href={Routes.Rules()} className="font-semibold text-indigo-600">
                   <span className="absolute inset-0" aria-hidden="true"></span>Read more{" "}
                   <span aria-hidden="true">&rarr;</span>
                 </Link>
