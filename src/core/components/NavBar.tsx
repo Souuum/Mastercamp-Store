@@ -105,7 +105,7 @@ const NavBar = () => {
                     id="user-menu-button"
                     ariaExpanded="false"
                     ariaHaspopup="true"
-                    href={Routes.LoginPage()}
+                    href={Routes.Account()}
                   >
                     <span className="sr-only">Open user menu</span>
                     <img
@@ -138,31 +138,25 @@ const NavBar = () => {
 
       <div className="sm:hidden" id="mobile-menu">
         <div className="space-y-1 px-2 pb-3 pt-2">
-          <a
-            href="#"
+          <Link
+            href={Routes.Home()}
             className="bg-gray-900 text-white block rounded-md px-3 py-2 text-base font-medium"
             aria-current="page"
           >
-            Donec
-          </a>
-          <a
-            href="#"
+            Home
+          </Link>
+          <Link
+            href={Routes.Categories()}
             className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
           >
-            Vitae
-          </a>
-          <a
-            href="#"
+            Categories
+          </Link>
+          <Link
+            href={Routes.Recipes()}
             className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
           >
-            Etiam
-          </a>
-          <a
-            href="#"
-            className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
-          >
-            Venenatis
-          </a>
+            Recipes
+          </Link>
         </div>
       </div>
     </nav>

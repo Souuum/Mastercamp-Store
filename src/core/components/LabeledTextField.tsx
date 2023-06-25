@@ -30,7 +30,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
     const normalizedError = Array.isArray(error) ? error.join(", ") : error || submitError
 
     return (
-      <div {...outerProps}>
+      <div {...outerProps} className="flex flex-col items-center">
         <label {...labelProps}>
           {label}
           <input {...input} disabled={submitting} {...props} ref={ref} />

@@ -6,6 +6,7 @@ import login from "src/auth/mutations/login"
 import { Login } from "src/auth/schemas"
 import { useMutation } from "@blitzjs/rpc"
 import { Routes } from "@blitzjs/next"
+import styles from "src/styles/Home.module.css"
 
 type LoginFormProps = {
   onSuccess?: (user: PromiseReturnType<typeof login>) => void
@@ -14,11 +15,12 @@ type LoginFormProps = {
 export const LoginForm = (props: LoginFormProps) => {
   const [loginMutation] = useMutation(login)
   return (
-    <div>
+    <div className="flex min-h-full flex-col justify-center items-center px-6 py-12 lg:px-8">
       <h1>Login</h1>
 
       <Form
         submitText="Login"
+        submitStyle={styles.loginButton}
         schema={Login}
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {
@@ -37,15 +39,15 @@ export const LoginForm = (props: LoginFormProps) => {
           }
         }}
       >
-        <LabeledTextField name="email" label="Email" placeholder="Email" />
+        <LabeledTextField name="email" label="Email" placeholder="Email" className="" />
         <LabeledTextField name="password" label="Password" placeholder="Password" type="password" />
-        <div>
-          <Link href={Routes.ForgotPasswordPage()}>Forgot your password?</Link>
-        </div>
       </Form>
 
-      <div style={{ marginTop: "1rem" }}>
-        Or <Link href={Routes.SignupPage()}>Sign Up</Link>
+      <div className="flex flex-col items-center">
+        or
+        <Link href={Routes.SignupPage()} className={styles.button}>
+          <strong>Sign Up</strong>
+        </Link>
       </div>
     </div>
   )

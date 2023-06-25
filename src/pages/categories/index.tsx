@@ -1,37 +1,20 @@
-import { Suspense } from "react"
-import Link from "next/link"
-import Layout from "src/core/layouts/Layout"
-import { useCurrentUser } from "src/users/hooks/useCurrentUser"
-import { useAllRecipes } from "src/recipes/hooks/useAllRecipes"
+import { BlitzPage } from "@blitzjs/auth"
 import NavBar from "src/core/components/NavBar"
-import logout from "src/auth/mutations/logout"
-import { useMutation, useQuery } from "@blitzjs/rpc"
-import { Routes, BlitzPage } from "@blitzjs/next"
+import Layout from "src/core/layouts/Layout"
+import { Suspense } from "react"
 import styles from "src/styles/Home.module.css"
-import RecipeRow from "src/recipes/components/RecipeRow"
-import RecipeRowCard from "src/recipes/components/RecipeRowCard"
-
-/*
- * This file is just for a pleasant getting started page for your new app.
- * You can delete everything in here and start from scratch if you like.
- */
+import { useCurrentUser } from "src/users/hooks/useCurrentUser"
+import { useMutation } from "@blitzjs/rpc"
+import Link from "next/link"
+import { Routes } from "@blitzjs/next"
 
 const UserInfo = () => {
   const currentUser = useCurrentUser()
-  const [logoutMutation] = useMutation(logout)
-  const recipes = useAllRecipes()
 
   if (currentUser) {
-    console.log(recipes)
     return (
       <div className="flex flex-col justify-center items-center">
-        <div className={styles.body}>
-          <div className="grid grid-cols-3 gap-4">
-            {recipes.map((recipe) => (
-              <RecipeRowCard key={recipe.id} recipeId={recipe.id} />
-            ))}
-          </div>
-        </div>
+        <div className={styles.body}></div>
       </div>
     )
   } else {
@@ -53,9 +36,9 @@ const UserInfo = () => {
   }
 }
 
-const Recipes: BlitzPage = () => {
+const Categories: BlitzPage = () => {
   return (
-    <Layout title="Recipe">
+    <Layout title="Categories">
       <div className={styles.globe} />
       <Suspense>
         <NavBar />
@@ -77,4 +60,4 @@ const Recipes: BlitzPage = () => {
   )
 }
 
-export default Recipes
+export default Categories

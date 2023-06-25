@@ -3,6 +3,9 @@ import { Form, FORM_ERROR } from "src/core/components/Form"
 import signup from "src/auth/mutations/signup"
 import { Signup } from "src/auth/schemas"
 import { useMutation } from "@blitzjs/rpc"
+import styles from "src/styles/Home.module.css"
+import Link from "next/link"
+import { Routes } from "@blitzjs/next"
 
 type SignupFormProps = {
   onSuccess?: () => void
@@ -11,11 +14,12 @@ type SignupFormProps = {
 export const SignupForm = (props: SignupFormProps) => {
   const [signupMutation] = useMutation(signup)
   return (
-    <div>
+    <div className="flex min-h-full flex-col justify-center items-center px-6 py-12 lg:px-8">
       <h1>Create an Account</h1>
 
       <Form
-        submitText="Create Account"
+        submitText="Sign Up"
+        submitStyle={styles.button}
         schema={Signup}
         initialValues={{ email: "", password: "", username: "" }}
         onSubmit={async (values) => {
@@ -36,6 +40,12 @@ export const SignupForm = (props: SignupFormProps) => {
         <LabeledTextField name="password" label="Password" placeholder="Password" type="password" />
         <LabeledTextField name="username" label="username" placeholder="username" />
       </Form>
+      <div className="flex flex-col items-center">
+        or
+        <Link href={Routes.LoginPage()} className={styles.loginButton}>
+          <strong>Login</strong>
+        </Link>
+      </div>
     </div>
   )
 }

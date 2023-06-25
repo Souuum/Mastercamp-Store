@@ -18,6 +18,7 @@ export interface FormProps<S extends z.ZodType<any, any>>
 export function Form<S extends z.ZodType<any, any>>({
   children,
   submitText,
+  submitStyle,
   schema,
   initialValues,
   onSubmit,
@@ -29,7 +30,7 @@ export function Form<S extends z.ZodType<any, any>>({
       validate={validateZodSchema(schema)}
       onSubmit={onSubmit}
       render={({ handleSubmit, submitting, submitError }) => (
-        <form onSubmit={handleSubmit} className="form" {...props}>
+        <form onSubmit={handleSubmit} className="form flex flex-col items-center" {...props}>
           {/* Form fields supplied as children are rendered here */}
           {children}
 
@@ -40,7 +41,7 @@ export function Form<S extends z.ZodType<any, any>>({
           )}
 
           {submitText && (
-            <button type="submit" disabled={submitting}>
+            <button type="submit" disabled={submitting} className={submitStyle}>
               {submitText}
             </button>
           )}
