@@ -9,6 +9,7 @@ import Link from "next/link"
 import { Routes } from "@blitzjs/next"
 import { useAllCategories } from "src/categories/hooks/useAllCategories"
 import RecipeRow from "src/recipes/components/RecipeRow"
+import Footer from "src/core/components/Footer"
 
 const UserInfo = () => {
   const categories = useAllCategories()
@@ -45,7 +46,7 @@ const Categories: BlitzPage = () => {
           <UserInfo />
         </Suspense>
 
-        <footer className={styles.footer}></footer>
+        <Footer />
       </div>
     </Layout>
   )
