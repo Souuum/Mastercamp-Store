@@ -4,9 +4,16 @@ import { useCurrentUser } from "src/users/hooks/useCurrentUser"
 import logout from "src/auth/mutations/logout"
 import { useMutation } from "@blitzjs/rpc"
 import { Routes, BlitzPage } from "@blitzjs/next"
+import { useAllRecipes } from "src/recipes/hooks/useAllRecipes"
 import styles from "src/styles/Home.module.css"
 import NavBar from "src/core/components/NavBar"
-import { Suspense } from "react"
+import { Suspense, useEffect, useState } from "react"
+import RecipeRow from "src/recipes/components/RecipeRow"
+import RecipeRowCard from "src/recipes/components/RecipeRowCard"
+import { useRecipe } from "src/recipes/hooks/useRecipe"
+import { Recipe } from "@prisma/client"
+import { useAllCategories } from "src/categories/hooks/useAllCategories"
+import Footer from "src/core/components/Footer"
 /*
  * This file is just for a pleasant getting started page for your new app.
  * You can delete everything in here and start from scratch if you like.
@@ -48,6 +55,43 @@ const UserInfo = () => {
   }
 }
 
+const CategoriesInfos = () => {
+  const recipies = useAllRecipes()
+  const categories = useAllCategories()
+
+  const [dishesOfTheDay, setDishesOfTheDay] = useState<Recipe[]>([])
+  useEffect(() => {
+    if (recipies) {
+      setDishesOfTheDay(
+        recipies.sort((a: Recipe, b: Recipe) => (a.createdAt > b.createdAt ? 1 : 0)).slice(0, 5)
+      )
+    }
+  }, [recipies])
+
+  return (
+    <>
+      <RecipeRow title="Dishes of the Day">
+        {!dishesOfTheDay && "Loading..."}
+        {dishesOfTheDay &&
+          dishesOfTheDay.map((recipe) => <RecipeRowCard key={recipe.id} recipeId={recipe.id} />)}
+      </RecipeRow>
+      <RecipeRow title="Categories">
+        {!categories && "Loading..."}
+        {categories &&
+          categories.map((category) => (
+            <Link
+              key={category.id}
+              href={Routes.CategoryPage({ categoryId: category.id })}
+              className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+            >
+              {category.name}
+            </Link>
+          ))}
+      </RecipeRow>
+    </>
+  )
+}
+
 const Home: BlitzPage = () => {
   return (
     <Layout title="Home">
@@ -55,7 +99,7 @@ const Home: BlitzPage = () => {
       <Suspense>
         <NavBar />
       </Suspense>
-      <div className={styles.container}>
+      <div>
         <div className="relative isolate px-6 pt-14 lg:px-8">
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
             <div className="hidden sm:mb-8 sm:flex sm:justify-center">
@@ -95,8 +139,11 @@ const Home: BlitzPage = () => {
             ></div>
           </div>
         </div>
+        <Suspense fallback="Loading...">
+          <CategoriesInfos />
+        </Suspense>
 
-        <footer className={styles.footer}></footer>
+        <Footer />
       </div>
     </Layout>
   )
