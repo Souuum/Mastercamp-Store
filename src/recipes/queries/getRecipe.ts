@@ -12,7 +12,7 @@ export default async function getRecipe(input, ctx: Ctx) {
 
   const data = GetRecipe.parse(input)
 
-  ctx.session.$authorize()
+  //ctx.session.$authorize()
 
   const recipe = await db.recipe.findUnique({
     where: { id: data.id },

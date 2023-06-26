@@ -1,5 +1,5 @@
 # mastercamp-store
-Mastercamp Web shop project at EFREI Paris
+Mastercamp Web shop project at EFREI
 
 
 ```

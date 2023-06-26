@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Routes } from "@blitzjs/next"
 import { useRouter } from "next/router"
 import { useCurrentUser } from "src/users/hooks/useCurrentUser"
+import logo from "../../../public/STUDENT_PLATE_LOGO-removebg-preview.png"
 const NavBar = () => {
   const router = useRouter()
   const user = useCurrentUser()
@@ -48,12 +49,12 @@ const NavBar = () => {
             <div className="flex flex-shrink-0 items-center">
               <img
                 className="block h-8 w-auto lg:hidden"
-                src="https://cdn.iconscout.com/icon/free/png-512/free-food-kitchen-nonveg-chicken-chistmas-dinner-restaurant-2-10441.png?f=avif&w=512"
+                src={require("../../../public/sitelogo.png")}
                 alt="Your Company"
               />
               <img
                 className="hidden h-8 w-auto lg:block"
-                src="https://cdn.iconscout.com/icon/free/png-512/free-food-kitchen-nonveg-chicken-chistmas-dinner-restaurant-2-10441.png?f=avif&w=512"
+                src={require("../../../public/sitelogo.png")}
                 alt="Your Company"
               />
             </div>
@@ -82,7 +83,7 @@ const NavBar = () => {
                   Categories
                 </Link>
                 <Link
-                  href={Routes.Recipes()}
+                  href={Routes.List()}
                   className={
                     router.pathname == "/recipes"
                       ? "bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium"
@@ -152,7 +153,7 @@ const NavBar = () => {
             Categories
           </Link>
           <Link
-            href={Routes.Recipes()}
+            href={Routes.List()}
             className="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium"
           >
             Recipes
